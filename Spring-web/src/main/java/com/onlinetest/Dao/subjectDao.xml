@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.onlinetest.Dao.subjectDao">
+
+
+    <insert id="insertsubject">
+        insert into subject (major,stem,type,answer) values(#{major},#{stem},#{type},#{answer})
+    </insert>
+    <update id="updateSubjectbyid">
+        update subject set major=#{major},stem=#{stem},type=#{type},answer=#{answer} where id=#{id}
+    </update>
+
+    <delete id="deletesubjectbyid">
+        delete from subject where id = #{id};
+    </delete>
+
+    <select id="selectbyid" resultType="com.onlinetest.domainc.Subject">
+        select * from subject where id = #{id}
+    </select>
+
+    <select id="selectbyrandom" resultType="com.onlinetest.domainc.Subject">
+        select * from subject where major=#{major} order by rand() limit #{num};
+    </select>
+
+
+    <select id="selectall" resultType="com.onlinetest.domainc.Subject">
+        select* from subject;
+    </select>
+    <select id="selectbyrandom_type" resultType="com.onlinetest.domainc.Subject">
+        select * from subject where major=#{major} and type=#{type} order by rand() limit #{num};
+    </select>
+    <select id="selectbyrandombynum" resultType="com.onlinetest.domainc.Subject">
+        select * from subject order by rand() limit #{num}
+    </select>
+</mapper>

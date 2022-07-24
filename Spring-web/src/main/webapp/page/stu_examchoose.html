@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>专业方向选择</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../layuimini/lib/layui-v2.6.3/css/layui.css" media="all">
+    <link rel="stylesheet" href="../layuimini/css/public.css" media="all">
+</head>
+<body>
+<div class="layuimini-container">
+    <div class="layuimini-main">
+
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+            <legend>试卷生成</legend>
+        </fieldset>
+
+        <form id="subject-form" class="layui-form" action="">
+            
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 150px;">请选择两种学科方向：</label>
+                <div class="layui-input-block">
+					<input type="checkbox" name="major" value="毛概" lay-skin="primary" title="毛概" onClick="check()">
+					<input type="checkbox" name="major" value="计网" lay-skin="primary" title="计网" onClick="check()">
+					<input type="checkbox" name="major" value="计组" lay-skin="primary" title="计组" onClick="check()">
+					<input type="checkbox" name="major" value="军理" lay-skin="primary" title="军理" onClick="check()">
+					<input type="checkbox" name="major" value="Java程设" lay-skin="primary" title="Java程设" onClick="check()">
+                </div>
+            </div>
+			<div class="layui-form-item">
+			    <div class="layui-input-block">
+			        <button id="choices" type="button" class="layui-btn layui-btn-normal" lay-submit lay-filter="choiceBtn">确认选择</button>
+			    </div>
+			</div>
+
+        </form>
+    </div>
+</div>
+
+<script src="../layuimini/lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
+<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+<script>
+
+	layui.use(['form'], function () {
+        var form = layui.form,
+            layer = layui.layer,
+            $ = layui.$;
+
+        //监听提交
+        form.on('submit(choiceBtn)', function (data) {
+            $('#choices').click(function(){
+				var inputs = document.getElementsByTagName("input");
+				var total = 0;
+				for (var i=0;i<inputs.length;i++){
+					if(inputs[i].checked){
+						total = total+1;
+					}
+					
+				}
+				if(total != 2){
+					layer.alert('只能选择两个专业');
+					return false;
+				}
+                total=0;
+				window.location = '/Spring-web/CreateTestServlet?'+ $('#subject-form').serialize();
+            });
+            
+
+            return false;
+        });
+
+    });
+</script>
+
+</body>
+</html>

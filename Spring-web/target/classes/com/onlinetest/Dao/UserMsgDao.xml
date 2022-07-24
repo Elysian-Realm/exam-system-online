@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.onlinetest.Dao.UserMsgDao">
+
+
+    <insert id="InsertIntoUserMsg">
+        <!--insert into usermsg (name,_class,accountnumber,password,type) values(name,_class,accountnumber,password,type)-->
+        insert into usermsg (name,_class,accountnumber,password,type) values(#{name},#{_class},#{accountnumber},#{password},#{type})
+    </insert>
+
+    <update id="updateTypebyacc">
+        update usermsg set type=#{type} where accountnumber = #{accountnumber}
+    </update>
+
+    <update id="updatenameandclassbyacc">
+        update usermsg set name=#{name},_class=#{_class} where accountnumber = #{accountnumber}
+    </update>
+    <update id="updatepasswordbyacc">
+        update usermsg set password=#{password} where accountnumber = #{accountnumber}
+    </update>
+
+    <delete id="deletebyid">
+        delete from usermsg where id=#{id}
+    </delete>
+
+    <select id="SelectByAccAndPswd" resultType="com.onlinetest.domainc.UserMsg">
+        select * from usermsg where accountnumber=#{accountnumber} and password=#{password} and type=0
+    </select>
+
+    <select id="selectallstudent" resultType="com.onlinetest.domainc.UserMsg">
+        select * from usermsg where type='学生'
+    </select>
+
+    <select id="selectbyacc" resultType="com.onlinetest.domainc.UserMsg">
+        select * from usermsg where accountnumber=#{accountnumber}
+    </select>
+
+    <select id="selectalluser" resultType="com.onlinetest.domainc.UserMsg">
+        select * from usermsg;
+    </select>
+
+</mapper>
